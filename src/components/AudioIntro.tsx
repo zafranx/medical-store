@@ -9,48 +9,26 @@ export default function AudioIntro() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
-    // Create audio element with a text-to-speech like intro
-    // In a real implementation, you would have an actual audio file
-    audioRef.current = new Audio()
-    
-    // Simulate audio intro - in production, replace with actual audio file
-    const playIntro = () => {
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(
-          'नमस्कार! राहुल मेडिकल स्टोर में आपका स्वागत है। हम अंग्रेजी और आयुर्वेदिक दवाइयों की सेवा प्रदान करते हैं।'
-        )
-        utterance.lang = 'hi-IN'
-        utterance.rate = 0.8
-        utterance.onstart = () => setIsPlaying(true)
-        utterance.onend = () => setIsPlaying(false)
-        
-        speechSynthesis.speak(utterance)
-      }
-    }
-
-    // Auto-play attempt (most browsers block this)
-    const timer = setTimeout(() => {
-      try {
-        playIntro()
-      } catch (error) {
-        console.log('Auto-play blocked')
-      }
-    }, 1000)
+    let mounted = true
 
     return () => {
-      clearTimeout(timer)
-      if (speechSynthesis.speaking) {
+      mounted = false
+      if (typeof window !== 'undefined' && window.speechSynthesis && speechSynthesis.speaking) {
         speechSynthesis.cancel()
       }
     }
   }, [])
 
   const toggleAudio = () => {
+    if (typeof window === 'undefined') return
+
     if (isPlaying) {
-      speechSynthesis.cancel()
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel()
+      }
       setIsPlaying(false)
     } else {
-      if ('speechSynthesis' in window) {
+      if (window.speechSynthesis) {
         const utterance = new SpeechSynthesisUtterance(
           'नमस्कार! राहुल मेडिकल स्टोर में आपका स्वागत है। हम अंग्रेजी और आयुर्वेदिक दवाइयों की सेवा प्रदान करते हैं। किसी भी सहायता के लिए +91 8719054515 पर कॉल करें।'
         )
@@ -58,8 +36,8 @@ export default function AudioIntro() {
         utterance.rate = 0.8
         utterance.onstart = () => setIsPlaying(true)
         utterance.onend = () => setIsPlaying(false)
-        
-        speechSynthesis.speak(utterance)
+
+        window.speechSynthesis.speak(utterance)
       }
     }
   }
