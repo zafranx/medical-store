@@ -4,13 +4,11 @@ import ProductShowcase from '@/components/ProductShowcase'
 import ServicesSection from '@/components/ServicesSection'
 import ContactSection from '@/components/ContactSection'
 import LocationSection from '@/components/LocationSection'
-import AudioIntro from '@/components/AudioIntro'
 import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <AudioIntro />
       <Header />
       
       <section className="relative">

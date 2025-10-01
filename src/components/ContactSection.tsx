@@ -1,39 +1,41 @@
 'use client'
 import { motion } from 'framer-motion'
 import { Phone, MessageCircle, Instagram, Mail, MapPin, Clock } from 'lucide-react'
-
-const contactInfo = [
-  {
-    icon: Phone,
-    label: 'Phone',
-    value: '+91 8719054515',
-    href: 'tel:+918719054515',
-    color: 'text-blue-600'
-  },
-  {
-    icon: MessageCircle,
-    label: 'WhatsApp',
-    value: 'Chat with us',
-    href: 'https://wa.me/918719054515',
-    color: 'text-green-600'
-  },
-  {
-    icon: Instagram,
-    label: 'Instagram',
-    value: '@rahulmedicalstore',
-    href: 'https://instagram.com/rahulmedicalstore',
-    color: 'text-pink-600'
-  },
-  {
-    icon: MapPin,
-    label: 'Address',
-    value: 'इंद्रा मार्केट, कटरा रोड, हॉस्पिटल चौक, रीवा',
-    href: '#location',
-    color: 'text-red-600'
-  }
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function ContactSection() {
+  const { t } = useLanguage()
+
+  const contactInfo = [
+    {
+      icon: Phone,
+      labelKey: 'phone',
+      value: '+91 8719054515',
+      href: 'tel:+918719054515',
+      color: 'text-blue-600'
+    },
+    {
+      icon: MessageCircle,
+      labelKey: 'whatsapp',
+      valueKey: 'chatWithUs',
+      href: 'https://wa.me/918719054515',
+      color: 'text-green-600'
+    },
+    {
+      icon: Instagram,
+      labelKey: 'instagram',
+      value: '@rahulmedicalstore',
+      href: 'https://instagram.com/rahulmedicalstore',
+      color: 'text-pink-600'
+    },
+    {
+      icon: MapPin,
+      labelKey: 'address',
+      valueKey: 'addressValue',
+      href: '#location',
+      color: 'text-red-600'
+    }
+  ]
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -47,8 +49,8 @@ export default function ContactSection() {
           <Phone className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-gray-800">Contact Us</h3>
-          <p className="text-gray-600">Get in touch for any assistance</p>
+          <h3 className="text-2xl font-bold text-gray-800">{t('contactUs')}</h3>
+          <p className="text-gray-600">{t('getInTouchDesc')}</p>
         </div>
       </div>
 
@@ -70,8 +72,8 @@ export default function ContactSection() {
               <item.icon className={`w-5 h-5 ${item.color}`} />
             </div>
             <div>
-              <p className="text-sm text-gray-500">{item.label}</p>
-              <p className="font-medium text-gray-800">{item.value}</p>
+              <p className="text-sm text-gray-500">{t(item.labelKey)}</p>
+              <p className="font-medium text-gray-800">{item.valueKey ? t(item.valueKey) : item.value}</p>
             </div>
           </motion.a>
         ))}
@@ -86,11 +88,11 @@ export default function ContactSection() {
       >
         <div className="flex items-center mb-2">
           <Clock className="w-5 h-5 text-blue-600 mr-2" />
-          <h4 className="font-semibold text-gray-800">Store Hours</h4>
+          <h4 className="font-semibold text-gray-800">{t('storeHours')}</h4>
         </div>
         <p className="text-sm text-gray-600">
-          Monday - Sunday: 8:00 AM - 10:00 PM<br />
-          Emergency services available 24/7
+          {t('mondayToSunday')}<br />
+          {t('emergencyServices')}
         </p>
       </motion.div>
 
@@ -108,14 +110,14 @@ export default function ContactSection() {
           className="flex items-center justify-center py-3 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
         >
           <MessageCircle className="w-4 h-4 mr-2" />
-          WhatsApp
+          {t('whatsapp')}
         </a>
         <a
           href="tel:+918719054515"
           className="flex items-center justify-center py-3 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
         >
           <Phone className="w-4 h-4 mr-2" />
-          Call Now
+          {t('callNow')}
         </a>
       </motion.div>
     </motion.div>

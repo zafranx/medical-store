@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation } from 'swiper/modules'
+import { useLanguage } from '@/context/LanguageContext'
 import 'swiper/css'
 import 'swiper/css/navigation'
 
@@ -51,6 +52,8 @@ const products = [
 ]
 
 export default function ProductShowcase() {
+  const { t } = useLanguage()
+
   return (
     <section className="py-16">
       <motion.div
@@ -60,9 +63,9 @@ export default function ProductShowcase() {
         viewport={{ once: true }}
         className="text-center mb-12"
       >
-        <h2 className="text-4xl font-bold text-gray-800 mb-4">Featured Products</h2>
+        <h2 className="text-4xl font-bold text-gray-800 mb-4">{t('featuredProducts')}</h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Quality medicines and healthcare products for your wellbeing
+          {t('qualityProductsDesc')}
         </p>
       </motion.div>
 
@@ -126,7 +129,7 @@ export default function ProductShowcase() {
                   whileTap={{ scale: 0.95 }}
                   className="w-full bg-gradient-to-r from-red-500 to-red-600 text-white py-2 px-4 rounded-lg hover:from-red-600 hover:to-red-700 transition-all duration-300"
                 >
-                  Inquire Now
+                  {t('inquireNow')}
                 </motion.button>
               </motion.div>
             </SwiperSlide>
