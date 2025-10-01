@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
-  metadataBase: new URL('https://rahulmedicalstore.com'),
+  metadataBase: new URL('https://rahulmedicalstore.netlify.app'),
   alternates: {
     canonical: '/',
   },
