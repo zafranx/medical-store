@@ -1,8 +1,11 @@
 'use client'
 import { motion } from 'framer-motion'
 import { MapPin, Navigation } from 'lucide-react'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function LocationSection() {
+  const { t } = useLanguage()
+
   return (
     <motion.div
       initial={{ opacity: 0, x: 50 }}
@@ -17,16 +20,15 @@ export default function LocationSection() {
           <MapPin className="w-6 h-6 text-white" />
         </div>
         <div>
-          <h3 className="text-2xl font-bold text-gray-800">Our Location</h3>
-          <p className="text-gray-600">Visit us at our store</p>
+          <h3 className="text-2xl font-bold text-gray-800">{t('ourLocation')}</h3>
+          <p className="text-gray-600">{t('visitUsAtStore')}</p>
         </div>
       </div>
 
       <div className="mb-6">
-        <h4 className="font-semibold text-gray-800 mb-2">राहुल मेडिकल स्टोर</h4>
+        <h4 className="font-semibold text-gray-800 mb-2">{t('storeName')}</h4>
         <p className="text-gray-600 mb-4">
-          इंद्रा मार्केट, कटरा रोड<br />
-          हॉस्पिटल चौक, रीवा<br />
+          {t('addressValue')}<br />
           Madhya Pradesh, India
         </p>
         
@@ -39,7 +41,7 @@ export default function LocationSection() {
           className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
         >
           <Navigation className="w-4 h-4 mr-2" />
-          Get Directions
+          {t('getDirections')}
         </motion.a>
       </div>
 
@@ -71,12 +73,12 @@ export default function LocationSection() {
         className="mt-6 grid grid-cols-2 gap-4 text-center"
       >
         <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl">
-          <h5 className="font-semibold text-gray-800">Free Delivery</h5>
-          <p className="text-sm text-gray-600">Within 5km radius</p>
+          <h5 className="font-semibold text-gray-800">{t('freeDeliveryService')}</h5>
+          <p className="text-sm text-gray-600">{t('within5km')}</p>
         </div>
         <div className="p-4 bg-gradient-to-r from-red-50 to-pink-50 rounded-xl">
-          <h5 className="font-semibold text-gray-800">Quick Service</h5>
-          <p className="text-sm text-gray-600">30 min delivery</p>
+          <h5 className="font-semibold text-gray-800">{t('quickService')}</h5>
+          <p className="text-sm text-gray-600">{t('thirtyMinDelivery')}</p>
         </div>
       </motion.div>
     </motion.div>
